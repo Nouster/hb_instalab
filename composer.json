@@ -18,5 +18,7 @@
       "email": "lucas@ld-web.net"
     }
   ],
-  "require": {}
+  "require": {
+    "symfony/dotenv": "^6.2"
+  }
 }
