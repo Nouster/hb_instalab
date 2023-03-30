@@ -25,9 +25,9 @@ try {
   $crud->create($newUser);
 } catch (UserRegisterException $e) {
   $_SESSION['flash'] = $e->getMessage();
+  Utils::redirect('register.php');
 } catch (PDOException $e) {
   $_SESSION['flash'] = $e->getCode() . " / " . $e->getMessage();
-} finally {
   Utils::redirect('register.php');
 }
 
