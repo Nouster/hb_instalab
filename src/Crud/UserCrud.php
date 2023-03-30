@@ -4,7 +4,6 @@ namespace App\Crud;
 
 use App\User\UserRegister;
 use PDO;
-use PDOException;
 
 // Create / Read / Update / Delete
 class UserCrud
