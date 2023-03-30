@@ -1,7 +1,7 @@
 <?php
-session_start();
 require_once 'vendor/autoload.php';
 
+use App\Session\Session;
 use App\User\Exception\UserLoginException;
 use App\User\User;
 use App\Utils;
@@ -14,20 +14,20 @@ if ($email === null || $password === null) {
 }
 
 require_once 'db/pdo.php';
+$session = new Session();
 
 // Trouver l'utilisateur qui a l'email passé dans le formulaire
 // Pour pouvoir ensuite récupérer son mot de passe
 // et le comparer avec le mot de passe qui a été saisi dans le formulaire
 try {
   $user = new User($pdo, $email, $password);
-  // $session = new Session($user);
+  $session->setUser($user);
+  // Connexion
+  echo "Vous êtes connecté";
 } catch (UserLoginException $e) {
-  $_SESSION['flash'] = $e->getMessage();
+  $session->addFlash($e->getMessage());
   Utils::redirect('login.php');
 } catch (PDOException $e) {
-  $_SESSION['flash'] = $e->getCode() . "/" . $e->getMessage();
+  $session->addFlash($e->getCode() . "/" . $e->getMessage());
   Utils::redirect('login.php');
 }
-
-// Connexion
-echo "Vous êtes connecté";

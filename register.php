@@ -1,15 +1,21 @@
-<?php require_once 'layout/header.php'; ?>
+<?php
+require_once 'vendor/autoload.php';
+
+use App\Session\Session;
+
+$session = new Session();
+
+require_once 'layout/header.php';
+?>
 
 <div class="container">
   <h1>Inscription</h1>
 
-  <?php if (isset($_SESSION['flash'])) { ?>
+  <?php if ($session->hasFlash()) { ?>
     <div class="alert alert-danger">
-      <?php echo $_SESSION['flash']; ?>
+      <?php echo $session->consumeFlash(); ?>
     </div>
-  <?php
-    unset($_SESSION['flash']);
-  } ?>
+  <?php } ?>
 
   <form action="register_process.php" method="post">
     <div class="form-floating mb-3">
