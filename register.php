@@ -3,6 +3,14 @@
 <div class="container">
   <h1>Inscription</h1>
 
+  <?php if (isset($_SESSION['flash'])) { ?>
+    <div class="alert alert-danger">
+      <?php echo $_SESSION['flash']; ?>
+    </div>
+  <?php
+    unset($_SESSION['flash']);
+  } ?>
+
   <form action="register_process.php" method="post">
     <div class="form-floating mb-3">
       <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
