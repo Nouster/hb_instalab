@@ -25,7 +25,7 @@ class UserRegister
 
   private function passwordIsValid(): bool
   {
-    return mb_strlen($this->password) > 8;
+    return mb_strlen($this->password) >= 8;
   }
 
   public function getEmail(): string
